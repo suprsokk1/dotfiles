@@ -1,0 +1,10 @@
+.aliases
+.zshrc
+.zshenv
+.config/btop/btop.conf
+.config/environment.d/
+.config/systemd/user/service.d/
+.config/git/config
+.config/doom/config.el
+.config/doom/init.el
+.config/doom/packages.el

@@ -1,0 +1,3 @@
+
+alias -- vpn-on='${HOME}/Documents/scratch/vpn-tpm-opennconnect/tmp/start.sh'
+alias -- vpn-off=''

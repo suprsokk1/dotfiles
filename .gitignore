@@ -1,0 +1,3 @@
+*.log
+*.sh
+!/script/import-dotfiles.sh
