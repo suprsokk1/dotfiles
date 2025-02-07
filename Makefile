@@ -5,4 +5,4 @@ import = -- $(HOME)/ dotfiles/
 default: check
 
 import check:
-	rsync --backup-dir $(HOME)/Backup/rsync/$(shell systemd-escape $(PWD))-$(shell date +%s)  --verbose --recursive $(call $@)
+	find dotfiles/ -type f -printf '%P\0' | rsync --files-from=- --from0 --backup-dir $(HOME)/Backup/rsync/$(shell systemd-escape $(PWD))-$(shell date +%s)  --verbose $(call $@)
