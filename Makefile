@@ -1,6 +1,8 @@
+check  = --dry-run -- dotfiles/ $(HOME)/
+export = -- dotfiles/ $(HOME)/
+import = -- $(HOME)/ dotfiles/
 
-help:
-	: TODO help text
+default: check
 
-import:
-	./script/import-dotfiles.sh ${rsync}
+import check:
+	rsync --backup-dir $(HOME)/Backup/rsync/$(shell systemd-escape $(PWD))-$(shell date +%s)  --verbose --recursive $(call $@)

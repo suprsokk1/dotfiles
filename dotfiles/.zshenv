@@ -1,13 +1,18 @@
-# ~/.zshrc
-systemctl --user import-environment CABAL_DIR CARGO_HOME EDITOR GOPATH LC_ALL LESS PAGER PIPX_HOME XDG_CONFIG_HOME ZSH ZSH_THEME
+# shellcheck disable=SC2059,SC2034,SC1090,SC2206,SC2053,SC2296
+set -o allexport
+. <(/usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator)
 
-ZSH=${ZSH:-${HOME}/.oh-my-zsh}
-ZSH_THEME=${ZSH_THEME:-simple}
+SHELLCHECK_OPTS="-e SC2059 -e SC2034 -e SC1090 -e SC2206 -e SC2053 -e SC2296"
 
-export GOPATH=${GOPATH:-${HOME}/opt}/go}
-export CARGO_HOME=${CARGO_HOME:-${HOME}/opt}/cargo}
-export CABAL_DIR=${CABAL_DIR:-${HOME}/opt}/cabal}
-export PIPX_HOME=${PIPX_HOME:-${HOME}/opt}/pipx}
+path+=(${HOME}/{,{opt,.local}/}*/bin)
+path=(${(u)path:#*.[0-9]*})
 
-export path=(${path} ${HOME}/opt/*/bin)
-plugins=(fzf emacs tmux pip direnv docker gh)
+HISTSIZE=1000000000
+SAVEHIST=$HISTSIZE
+EXTENDED_HISTORY=1
+
+LS_COLORS=$(vivid generate catppuccin-mocha 2>/dev/null || printenv LS_COLORS)
+
+zpath=($zpath "$HOME"/opt/zsh-*)
+
+set +o allexport
