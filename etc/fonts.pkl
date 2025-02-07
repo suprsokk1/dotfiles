@@ -1,0 +1,39 @@
+hidden font {
+   family = "UbuntuSansMono Nerd Font Propo"
+   size = 10
+}
+
+hidden pkl = read("file:/proc/self/cmdline").text.split(#"\#u{00}"#).last
+
+output {
+   text = """
+   pkl eval \(pkl) -m $HOME/
+   pkill waybar -SIGUSR2
+
+   """
+
+   files {
+      [".sway/conf.d/fonts.conf"] {
+         text = """
+         font pango:\(font.family) \(font.size)
+
+         """
+      }
+
+      [".config/kitty/conf.d/fonts.conf"] {
+         text = """
+         font_family \(font.family)
+         font_size \(font.size)
+
+         """
+      }
+
+      [".config/waybar/fonts.css"] {
+         text = """
+         * {
+            font-family: "\(font.family)";
+         }
+         """
+      }
+   }
+}
