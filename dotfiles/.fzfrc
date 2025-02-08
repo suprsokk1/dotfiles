@@ -2,15 +2,17 @@
 --margin=0
 --padding=0
 --border=none
+--listen=127.0.0.1:6266
+--tail=50
 --ansi
 --exact
 --multi
---preview='~/Sync/scripts/fzf-preview.sh "{+}"'
---info-command='~/Sync/scripts/fzf-preview.sh'
+--preview='$HOME/Projects/dotfiles/etc/fzf-preview.sh "{+}"'
+--info-command='$HOME/Projects/dotfiles/etc/fzf-info.sh'
 --preview-window=hidden
---separator='\0'
+--separator=' '
 --bind="alt-a:select-all"
 --bind="alt-p:toggle-preview"
 --bind="alt-s:toggle-search"
 --bind="ctrl-t:toggle-all"
---bind="alt-1:change-preview(git fzf-preview-1 {+})"
+--bind="alt-1:change-preview($HOME/Projects/dotfiles/etc/fzf-preview.sh)"

@@ -28,3 +28,6 @@ alias -s git='git -C $HOME/opt clone --depth=1'
 
 zstyle ':completion:*:complete:(cd|pushd):*' tag-order 'local-directories named-directories'
 
+# fzf
+FZF_API_KEY="$(head -c 32 /dev/urandom | base64)"
+export FZF_API_KEY
