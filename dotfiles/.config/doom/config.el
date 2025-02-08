@@ -144,8 +144,7 @@
   (setq-hook! 'sh-mode-hook compile-command (concat "bash" " " (buffer-file-name))))
 
 (use-package! sh-mode
-  :init
-
+  ;; :init
   :bind (:map sh-mode-map))
 
 (after! yasnippet
@@ -165,3 +164,10 @@
 (use-package! corfu
   :custom
   (corfu-auto-delay .3))
+
+(use-package! align
+  ;; :config
+  ;; (add-to-list 'align-rules-list )
+  :custom
+  (align-region-separate "^\\s-*[{}]?\\s-*$")
+  (align-text-modes '(text-mode outline-mode conf-mode)))
