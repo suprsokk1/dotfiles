@@ -2,7 +2,7 @@
     "custom/dummy-status": {
         "escape": false,
         "interval": 5,
-        "exec": "bash ${HOME}/Sync/scripts/waybar.sh",
+        "exec": "bash ${HOME}/Projects/dotfiles/etc/waybar.sh",
         "format": "",
         "format-tooltip": "",
         "format-icons": {
@@ -376,5 +376,8 @@
         "temperature",
         "sway/language",
         "battery"
-    ]
+    ],
+
+   "include": "conf.d/generated.conf",
+
 }
