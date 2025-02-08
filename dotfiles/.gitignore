@@ -1,0 +1,11 @@
+!/.aliases
+!/.config/
+!/.fzfrc
+!/.gitignore
+!/.gnupg/
+!/.gnupg/gpg-agent.conf
+!/.gnupg/gpg.conf
+!/.sway/config
+!/.zprofile
+!/.zshenv
+!/.zshrc
