@@ -1,0 +1,28 @@
+import "config.pkl"
+
+hidden prefix = "https://raw.githubusercontent.com/catppuccin"
+hidden cmdline = read("file:/proc/self/cmdline").text.split(#"\#u{00}"#).join(" ")
+
+output {
+  files {
+    [".config/tmux/theme.conf"] {
+      text = read("\(prefix)/tmux/refs/heads/main/themes/catppuccin_\(config.theme)_tmux.conf").text
+    }
+
+    [".config/btop/theme.theme"] {
+      text = read("\(prefix)/btop/refs/heads/main/themes/catppuccin_\(config.theme).theme").text
+    }
+
+    [".config/waybar/theme.css"] {
+      text = read("\(prefix)/waybar/refs/heads/main/themes/\(config.theme).css").text
+    }
+
+    [".config/kitty/theme.conf"] {
+      text = read("\(prefix)/kitty/refs/heads/main/themes/\(config.theme).conf").text
+    }
+
+    [".config/kitty/diff.conf"] {
+      text = read("\(prefix)/kitty/refs/heads/main/themes/diff-\(config.theme).conf").text
+    }
+  }
+}

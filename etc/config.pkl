@@ -1,0 +1,6 @@
+font {
+   family = read?("env:FONT_FAMILY") ?? "UbuntuSansMono Nerd Font Propo"
+   size = read?("env:FONT_SIZE") ?? 10
+}
+
+theme = read?("env:CATPPUCCIN_THEME") ?? "mocha"
