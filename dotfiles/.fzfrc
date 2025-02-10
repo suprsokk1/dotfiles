@@ -1,9 +1,7 @@
---reverse
 --margin=0
 --padding=0
 --border=none
 --listen=127.0.0.1:6266
---tail=50
 --ansi
 --exact
 --multi
