@@ -49,7 +49,7 @@
     "custom/lsyncd-status": {
         "escape": false,
         "interval": 1,
-        "exec": "set - good bad; { systemcl status --user lsyncd@\\*; } &>/dev/null",
+        "exec": "set - good bad; { systemcl status --user lsyncd@\\* ; } &>/dev/null",
         "format": "{icon}",
         "format-good": "{icon}",
         "format-bad": "{icon}",
@@ -135,6 +135,7 @@
 
     "backlight": {
         "format": "{percent}% {icon}",
+        "on-click": "",
         "format-icons": [
             "\ud83c\udf11",
             "\ud83c\udf18",
@@ -243,6 +244,32 @@
         "format": "{}% \uf0c9"
     },
 
+    "network#tailscale": {
+        "interface": "",
+        "format": "{icon}",
+        "format-icons": ["󱗼"],
+        "format-ethernet": "{icon}",
+        "format-disconnected": "", //An empty format will hide the module.
+        "on-click": "notify-send 'foo' ; ip -j r | systemd-run --user --pipe --wait wl-copy",
+        "format-disconnected": "",
+        "tooltip-format": "{ifname}",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50
+    },
+
+    "network#pia": {
+        "interface": "wgpia*",
+        "format": "{icon}}",
+        "format-icons": ["󰖂"],
+        "format-ethernet": "{icon}",
+        "format-disconnected": "", //An empty format will hide the module.
+        "on-click": "notify-send 'foo' ; ip -j r | systemd-run --user --pipe --wait wl-copy",
+        "format-disconnected": "",
+        "tooltip-format": "{ifname}",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50
+    },
+
     "network": {
         "interface": "wlp0s20f3",
         "format": "{ifname}",
@@ -303,8 +330,10 @@
 
     "pulseaudio": {
         "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon}\uf294 {format_source}",
-        "format-bluetooth-muted": "\udb81\uddff {icon}\uf294 {format_source}",
+//        "format-bluetooth": "{volume}%  {icon} {format_source}",
+        "format-bluetooth": " {icon} {format_source}",
+//        "format-bluetooth-muted": "\udb81\uddff  {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
         "format-icons": {
             "car": "\uf1b9",
             "default": [
@@ -312,15 +341,16 @@
                 "\uf027",
                 "\uf028"
             ],
-            "hands-free": "\uf590",
-            "headphone": "\uf025",
-            "headset": "\uf590",
-            "phone": "\uf095",
+            "hands-free": "",
+            "headphone": "",
+            "headset": "",
+            "phone": "",
             "portable": "\uf095"
         },
         "format-muted": "\udb81\uddff {format_source}",
-        "format-source": "{volume}% \uf130",
-        "format-source-muted": "\uf131",
+//        "format-source": "{volume}% \uf130",
+        "format-source": "",
+        "format-source-mute3d": "",
         "on-click": "pavucontrol"
     },
 
@@ -370,14 +400,17 @@
         "custom/docker-watch",
         "custom/emacs2",
         "custom/syncthing",
+        "backlight",
+        "network#pia",
+        "network#tailscale",
         "network",
-        "wireplumber",
+        // "wireplumber",
         "pulseaudio",
         "temperature",
         "sway/language",
         "battery"
     ],
 
-   "include": "conf.d/generated.conf",
+//   "include": "conf.d/generated.conf",
 
 }
