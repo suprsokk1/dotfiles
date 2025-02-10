@@ -1,58 +1,9 @@
 # -*- mode: sh -*-
 alias -- grep 'command grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv}'
-
-if nomino --version &>/dev/null
-then
-alias -- rename='noglob nomino --no-extension --mkdir --generate $HOME/Backup/_nomino-map_${EPOCHSECONDS}_`date -I`-${RANDOM}.map --regex'
-alias -- rename-test='noglob nomino --dry-run --no-extension --mkdir --generate $HOME/Backup/_nomino-map_${EPOCHSECONDS}_`date -I`-${RANDOM}.map --regex'
-alias -- ren=rename
-fi
-
-if fd --version &>/dev/null
-then
-alias -- fd='command fd --no-ignore-vcs'
-alias -- fs2json='fd -uuu -tf -X jo {}=@{} --base-directory'
-fi
-
-if gron --version &>/dev/null
-then
-alias -- gron='command gron ${INSIDE_EMACS:+--colorize}'
-fi
-
-if exa --version &>/dev/null
-then
-alias -- ls='command exa --git --group-directories-first'
-fi
-
-if bat --version &>/dev/null
-then
-alias -- cat='command bat'
-fi
-
-if jc --version &>/dev/null
-then
-alias -- jc='command jc'
-fi
-
-if tldr --version &>/dev/null
-then
-alias -- man='command tldr'
-fi
-
-if yj -v &>/dev/null
-then
-alias -- yj='command yj -yj'
-alias -- yt='command yj -yt'
-alias -- jy='command yj -jy'
-alias -- jt='command yj -jt'
-alias -- ty='command yj -ty'
-alias -- tj='command yj -tj'
-fi
-
-alias -- upper='command sed -E -e '\''s#.*#\U&#'\'''
-alias -- lower='command sed -E -e '\''s#.*#\L&#'\'''
-alias -- capitalize='command sed -E -e '\''s#[[:word:]]+#\u&#g'\'''
-alias -- punct-split='command sed -E -e '\''s##\u&#g'\'' -e '\''y///'\'' '
+alias -- upper='command sed -E -e '\''s#.*#\U&#'\'''                          # REVIEW
+alias -- lower='command sed -E -e '\''s#.*#\L&#'\'''                          # REVIEW
+alias -- capitalize='command sed -E -e '\''s#[[:word:]]+#\u&#g'\'''           # REVIEW
+alias -- punct-split='command sed -E -e '\''s##\u&#g'\'' -e '\''y///'\'' '    # REVIEW
 alias -- inside-quotes='command grep -Po -- '\''(?<=([\x27\x22])).*(\1)'\'' ' # REVIEW
 
 alias -- xargs='command xargs --no-run-if-empty'
@@ -60,3 +11,5 @@ alias -- rsync='command rsync '
 alias -- --='if test -n "${TMUX_PANE}"; then command emacsclient --eval "(progn (switch-to-buffer (get-buffer (window-buffer)))(+tmux/cd-to-here))"; fi'
 alias -- copy-pane='command tmux capture-pane -p -S - | command wl-copy'
 alias -- copy-pwd='pwd | command wl-copy'
+
+alias -- run='command systemd-run --user'
