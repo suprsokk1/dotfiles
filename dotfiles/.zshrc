@@ -16,6 +16,14 @@ plugins+=( pyvenv )
 . "$ZSH"/oh-my-zsh.sh
 
 ## my custom stuff
+
+# completion
+zstyle ':completion:*:complete:(cd|pushd):*' tag-order 'local-directories named-directories'
+
+# fzf
+FZF_API_KEY="$(head -c 32 /dev/urandom | base64)"
+export FZF_API_KEY
+
 . ~/.aliases
 
 # global aliases
@@ -26,8 +34,51 @@ alias -g W='whence -f'
 
 alias -s git='git -C $HOME/opt clone --depth=1'
 
-zstyle ':completion:*:complete:(cd|pushd):*' tag-order 'local-directories named-directories'
 
-# fzf
-FZF_API_KEY="$(head -c 32 /dev/urandom | base64)"
-export FZF_API_KEY
+if nomino --version &>/dev/null
+then
+alias -- rename='noglob nomino --no-extension --mkdir --generate $HOME/Backup/_nomino-map_${EPOCHSECONDS}_`date -I`-${RANDOM}.map --regex'
+alias -- rename-test='noglob nomino --dry-run --no-extension --mkdir --generate $HOME/Backup/_nomino-map_${EPOCHSECONDS}_`date -I`-${RANDOM}.map --regex'
+alias -- ren=rename
+fi
+
+if fd --version &>/dev/null
+then
+alias -- fd='command fd --no-ignore-vcs'
+alias -- fs2json='fd -uuu -tf -X jo {}=@{} --base-directory'
+fi
+
+if gron --version &>/dev/null
+then
+alias -- gron='command gron ${INSIDE_EMACS:+--colorize}'
+fi
+
+if exa --version &>/dev/null
+then
+alias -- ls='command exa --git --group-directories-first'
+fi
+
+if bat --version &>/dev/null
+then
+alias -- cat='command bat'
+fi
+
+if jc --version &>/dev/null
+then
+alias -- jc='command jc'
+fi
+
+if tldr --version &>/dev/null
+then
+alias -- man='command tldr'
+fi
+
+if yj -v &>/dev/null
+then
+alias -- yj='command yj -yj'
+alias -- yt='command yj -yt'
+alias -- jy='command yj -jy'
+alias -- jt='command yj -jt'
+alias -- ty='command yj -ty'
+alias -- tj='command yj -tj'
+fi
