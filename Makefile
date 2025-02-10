@@ -1,6 +1,7 @@
-check  = --dry-run -- dotfiles/ $(HOME)/
-export = -- dotfiles/ $(HOME)/
-import = -- $(HOME)/ dotfiles/
+check			= --dry-run -- dotfiles/ $(HOME)/
+export		= -- dotfiles/ $(HOME)/
+import		= -- $(HOME)/ dotfiles/
+prepare = -- dotfiles/ $(HOME)/
 
 .PHONY: default
 default: check
@@ -9,8 +10,12 @@ default: check
 install: export fonts theme
 
 .PHONY: import export check
-import export check:
+import export check: prepare
 	find dotfiles/ -type f -printf '%P\0' | rsync --files-from=- --from0 --backup-dir $(HOME)/Backup/rsync/$(shell systemd-escape $(PWD))-$(shell date +%s) --verbose $(call $@)
+
+.PHONY: prepare
+prepare:
+	find dotfiles/ -type d -mindepth 2 -maxdepth 2 -printf '%P\0'  | rsync --dry-run --recursive --files-from=- --from0 --backup-dir $(HOME)/Backup/rsync/$(shell systemd-escape $(PWD))-$(shell date +%s) --verbose $(call $@)
 
 .PHONY: clean-ignored
 clean-ignored:
