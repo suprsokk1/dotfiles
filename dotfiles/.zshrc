@@ -26,6 +26,13 @@ export FZF_API_KEY
 
 . ~/.aliases
 
+if ! [[ -s ~/.pklpipe ]]
+then pkl eval package://pkg.pkl-lang.org/pkl-pantry/pkl.pipe@1.0.0#/shellshortcuts.pkl > ~/.pklpipe
+fi
+
+. ~/.pklpipe
+
+
 # global aliases
 alias -g T='python -m trace --ignore-dir=$(python -c "import sys; print(*sys.path[1:], sep=\":\")")'
 alias -g G=grep
@@ -33,7 +40,6 @@ alias -g R=rg
 alias -g W='whence -f'
 
 alias -s git='git -C $HOME/opt clone --depth=1'
-
 
 if nomino --version &>/dev/null
 then
