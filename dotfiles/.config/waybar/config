@@ -11,6 +11,18 @@
         "return-type": "text"
     },
 
+   "custom/usb-devices": {
+        "escape": false,
+        "interval": 5,
+        "exec": "jc lsusb | jq 'length - 5'",
+        "format": "{icon} {}",
+        "format-tooltip": "",
+        "format-icons": {
+            "default": ""
+        },
+        "return-type": "text"
+    },
+
     "custom/updates": {
          "format": "{}",
          "interval": 3600,                     // every hour
@@ -393,6 +405,7 @@
 
     "modules-right": [
     "custom/debug",
+        "custom/usb-devices",
         "custom/dummy-status",
         "custom/gh-user",
         "custom/systemd-status",
