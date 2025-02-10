@@ -14,5 +14,6 @@
 (package! rainbow-delimiters)
 ;; (package! sway)
 (package! systemd-mode)
-;; (package! origami)
 (package! writeroom-mode)
+(package! eldoc-box)
+;; (package! origami)

@@ -43,24 +43,24 @@
 
   ; https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-life/
   ;; (setq ibuffer-expert t) ; stop yes no prompt on delete
-  (setq ibuffer-saved-filter-groups
-	  `(quote (("default"
-		           ("dired" (mode . dired-mode))
-		           ("org-roam" (mode . org-roam-mode))
-	             ("org" (mode . org-mode))
-		           ("magit" (name . "^magit"))
+ (setq ibuffer-saved-filter-groups
+  `(quote (("default"
+           ("dired" (mode . dired-mode))
+           ("org-roam" (mode . org-roam-mode))
+             ("org" (mode . org-mode))
+           ("magit" (name . "^magit"))
                ("python" (or
-				                   (mode . python-mode)
-				                   (name . ,(format "^\\*%s\\*" python-shell-buffer-name))))
-		           ("planner" (or
-				                    (name . "^\\*Calendar\\*$")
-				                    (name . "^\\*Org Agenda\\*")))
-		           ("emacs" (or
-			                    (name . "^\\*scratch\\*$")
-			                    (name . "^\\*Messages\\*$")))))))
+                   (mode . python-mode)
+                   (name . ,(format "^\\*%s\\*" python-shell-buffer-name))))
+           ("planner" (or
+                    (name . "^\\*Calendar\\*$")
+                    (name . "^\\*Org Agenda\\*")))
+           ("emacs" (or
+                    (name . "^\\*scratch\\*$")
+                    (name . "^\\*Messages\\*$")))))))
 
   ;; (add-hook 'ibuffer-mode-hook
-	;;   (lambda () (ibuffer-switch-to-saved-filter-groups "default")))
+;;   (lambda () (ibuffer-switch-to-saved-filter-groups "default")))
   )
 
 (use-package! winner
@@ -131,6 +131,9 @@
     lsp-disabled-clients '(mspyls pylsp pyls)))
 
 (use-package! org-roam
+	:custom
+	(org-roam-directory "~/org-roam")
+
   :bind ((:map global-map
            ("s-SPC SPC" . org-roam-node-find))
           (:map org-roam-mode-map

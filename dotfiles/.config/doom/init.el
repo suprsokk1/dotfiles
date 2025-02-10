@@ -22,7 +22,7 @@
   (vc-gutter +diff-hl +pretty)
   (modeline +light)
   (ligatures +extra +iosevka)
-  ;; (custom-ligatures +ubuntu)
+  (custom-ligatures +ubuntu)
   :editor multiple-cursors snippets
   ;; format
   :config
