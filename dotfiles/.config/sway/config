@@ -116,8 +116,8 @@ bindsym {
 
     # launcher (app launcher)
     $MOD+d {
-        # exec rofi -show combi -modi combi,run,window,ssh,filebrowser -combi drun,window
-        exec rofi -show combi
+        exec rofi -show combi -modi combi,run,window,ssh,filebrowser -combi drun,window,custom
+        # exec rofi -show combi -c
     }
 
     # Alt+Tab window switching

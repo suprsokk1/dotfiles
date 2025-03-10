@@ -13,4 +13,4 @@
 --bind="alt-p:toggle-preview"
 --bind="alt-s:toggle-search"
 --bind="ctrl-t:toggle-all"
---bind="alt-1:change-preview($HOME/Projects/dotfiles/etc/fzf-preview.sh)"
+--bind="alt-1:change-preview($HOME/Projects/dotfiles/etc/fzf-prevdiew.sh)"

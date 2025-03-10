@@ -1,12 +1,24 @@
 {
-    "custom/dummy-status": {
+//    "custom/dummy-status": {
+//        "escape": false,
+//        "interval": 5,
+//        "exec": "bash ${HOME}/Projects/dotfiles/etc/waybar.sh",
+//        "format": "",
+//        "format-tooltip": "",
+//        "format-icons": {
+//            "default": ""
+//        },
+//        "return-type": "text"
+//    },
+
+   "custom/docker-context": {
         "escape": false,
         "interval": 5,
-        "exec": "bash ${HOME}/Projects/dotfiles/etc/waybar.sh",
-        "format": "",
+        "exec": "docker context show",
+        "format": "{icon} {}",
         "format-tooltip": "",
         "format-icons": {
-            "default": ""
+            "default": ""
         },
         "return-type": "text"
     },
@@ -404,13 +416,15 @@
     ],
 
     "modules-right": [
+
     "custom/debug",
         "custom/usb-devices",
-        "custom/dummy-status",
+        // "custom/dummy-status",
+        "custom/docker-context",
         "custom/gh-user",
-        "custom/systemd-status",
+        // "custom/systemd-status",
         "custom/git-status",
-        "custom/docker-watch",
+        //  "custom/docker-watch",
         "custom/emacs2",
         "custom/syncthing",
         "backlight",

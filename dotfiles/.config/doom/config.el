@@ -151,7 +151,7 @@
   :bind (:map sh-mode-map))
 
 (after! yasnippet
-  (setq +snippets-dir (expand-file-name "~/Templates/emacs/snippets")))
+  (setq +snippets-dir (expand-file-name "~/Templates/snippets")))
 
 (use-package! yasnippet
   :hook ((prog-mode sh-mode) . yas-minor-mode))
