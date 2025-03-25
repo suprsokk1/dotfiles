@@ -149,33 +149,37 @@ bindsym {
 
 }
 
-input type:keyboard {
-  # xkb_options caps:hyper,grp:rctrl_toggle
-  xkb_options caps:hyper
+input {
+  type:keyboard {
+    # xkb_options caps:hyper,grp:rctrl_toggle
+    xkb_options caps:hyper
 
-  # xkb_layout  us,no
-  xkb_layout  us
+    # xkb_layout  us,no
+    xkb_layout  us
 
-  # default: 250
-  repeat_delay 250
+    # default: 250
+    repeat_delay 250
 
-  # default: 54
-  repeat_rate 20
+    # default: 54
+    repeat_rate 20
+
+    xkb_capslock disabled
+    xkb_numlock disabled
+  }
+
+  type:touchpad {
+    dwt              enabled
+    tap              enabled
+    natural_scroll   enabled
+    middle_emulation enabled
+
+    # "adaptive" instead of "flat")
+    accel_profile "flat"
+
+    # set mouse sensitivity (between -1 and 1)
+    pointer_accel 0.5
+  }
 }
-
-input type:touchpad {
-  dwt              enabled
-  tap              enabled
-  natural_scroll   enabled
-  middle_emulation enabled
-
-  # "adaptive" instead of "flat")
-  accel_profile "flat"
-
-  # set mouse sensitivity (between -1 and 1)
-  pointer_accel 0.5
-}
-
 
 output {
   eDP-1 {
@@ -199,14 +203,11 @@ output {
 
 }
 
-input type:keyboard xkb_capslock disabled
-input type:keyboard xkb_numlock disabled
-
 exec_always {
-   systemd-run --user --property Restart=on-failure --property "ExecCondition=!pgrep emacs" --unit=editor doom run
-   systemd-run --user --property=Restart=on-failure --unit=notifications dunst
-   systemd-run --user --property=Restart=on-failure --unit=wlsunset wlsunset
-   systemd-run --user --property=Restart=on-failure --unit=statusbar waybar
+   # systemd-run --user --property Restart=on-failure --property "ExecCondition=!pgrep emacs" --unit=editor doom run
+   # systemd-run --user --property=Restart=on-failure --unit=notifications dunst
+   # systemd-run --user --property=Restart=on-failure --unit=wlsunset wlsunset
+   # systemd-run --user --property=Restart=on-failure --unit=statusbar waybar
    notify-send "SwayWM" "Config reloaded"
    /usr/bin/sh -c 'env | grep -e DBUS -e DISPLAY | install -DT /dev/stdin /run/user/$(id -u)/env'
    pgrep kitty || kitty --app-id terminal; [floating app_id=(?i)terminal] scratchpad show;  [floating app_id=(?i)terminal] resize set $size_terminal_width_ppt ppt $size_terminal_height_ppt ppt; [floating app_id=(?i)terminal] move position center

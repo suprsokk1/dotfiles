@@ -1,54 +1,22 @@
 {
-//    "custom/dummy-status": {
-//        "escape": false,
-//        "interval": 5,
-//        "exec": "bash ${HOME}/Projects/dotfiles/etc/waybar.sh",
-//        "format": "",
-//        "format-tooltip": "",
-//        "format-icons": {
-//            "default": ""
-//        },
-//        "return-type": "text"
-//    },
-
    "custom/docker-context": {
         "escape": false,
         "interval": 5,
         "exec": "docker context show",
-        "format": "{icon} {}",
+        "format": "{icon}",
+        "format-alt": "{icon} {}",
         "format-tooltip": "",
         "format-icons": {
             "default": ""
         },
         "return-type": "text"
     },
-
-   "custom/usb-devices": {
-        "escape": false,
-        "interval": 5,
-        "exec": "jc lsusb | jq 'length - 5'",
-        "format": "{icon} {}",
-        "format-tooltip": "",
-        "format-icons": {
-            "default": ""
-        },
-        "return-type": "text"
-    },
-
-    "custom/updates": {
-         "format": "{}",
-         "interval": 3600,                     // every hour
-         "exec": "checkupdates | wc -l",       // # of updates
-         "exec-if": "exit 0",                  // always run; consider advanced run conditions
-         "on-click": "termite -e 'sudo pacman -Syu'; pkill -SIGRTMIN+8 waybar", // update system
-         "signal": 8
-    },
-
     "custom/gh-user": {
         "escape": false,
         "interval": 2,
         "exec": "yq '.[].user' ${HOME}/.config/gh/hosts.yml",
-        "format": "{icon} {}",
+        "format": "{icon}",
+        "format-alt": "{icon} {}",
         "on-click": "notify-send $(gh auth switch)",
         "format-tooltip": "{}",
         "format-icons": {
@@ -56,7 +24,26 @@
         },
         "return-type": "text"
     },
-
+   "custom/usb-devices": {
+        "escape": false,
+        "interval": 5,
+        // "exec": "jc lsusb | jq 'length - 5'",
+        "exec": "lsusb",
+        "format": "{icon}",
+        "format-tooltip": "{}",
+        "format-icons": {
+            "default": ""
+        },
+        "return-type": "text"
+    },
+    "custom/updates": {
+         "format": "{}",
+         "interval": 3600,
+         "exec": "checkupdates | wc -l",
+         "exec-if": "exit 0",
+         "on-click": "termite -e 'sudo pacman -Syu'; pkill -SIGRTMIN+8 waybar",
+         "signal": 8
+    },
     "custom/debug": {
         "escape": false,
         "interval": 2,
@@ -69,7 +56,6 @@
         },
         "return-type": "text"
     },
-
     "custom/lsyncd-status": {
         "escape": false,
         "interval": 1,
@@ -85,7 +71,6 @@
         },
         "return-type": "json"
     },
-
     "custom/git-status": {
         "escape": false,
         "interval": 1,
@@ -97,7 +82,6 @@
         },
         "return-type": "json"
     },
-
     "custom/docker-watch": {
         "escape": false,
         "interval": 1,
@@ -108,7 +92,6 @@
         },
         "return-type": "json"
     },
-
     "custom/emacs2": {
         "escape": false,
         "interval": 1,
@@ -119,7 +102,6 @@
         },
         "return-type": "json"
     },
-
     "custom/syncthing": {
         "escape": false,
         "interval": 1,
@@ -130,7 +112,6 @@
         },
         "return-type": "json"
     },
-
     "custom/git-dirty": {
         "escape": false,
         "interval": 1,
@@ -141,22 +122,17 @@
         },
         "return-type": "json"
     },
-
     "custom/systemd-status": {
-        // "escape": true,
-//        "exec": "set - good bad; read -r text < <(systemd --user status | sed -Ezn 's/.*\bdegraded\b.*?(Failed:\\ [^\x0a]+).*/\\1/p'); [[ $text ]] || shift; jo class=$1 text=$text",
         "exec": "systemctl --user status | grep -Po -- '(?<=\\x46ailed:\\s)[^\x0a]+(?=units)'",
         "format": "{icon}",
         "format-icons": {
             "default": "❌",
             "bad": "❌",
-            // "good": "✅",
             "good": "",
         },
         "max-length": 40,
         "return-type": "text"
     },
-
     "backlight": {
         "format": "{percent}% {icon}",
         "on-click": "",
@@ -168,26 +144,6 @@
             "\ud83c\udf15"
         ]
     },
-
-    // "battery": {
-    //     "format": "{capacity}% {icon}",
-    //     "format-alt": "{time} {icon}",
-    //     "format-charging": "{capacity}%",
-    //     "format-full": "{capacity}% {icon}",
-    //     "format-icons": [
-    //         "\uf244",
-    //         "\uf243",
-    //         "\uf242",
-    //         "\uf241",
-    //         "\uf240"
-    //     ],
-    //     "format-plugged": "{capacity}% \uf1e6",
-    //     "states": {
-    //         "critical": 15,
-    //         "warning": 30
-    //     }
-    // }
-
     "battery": {
         "format": "{icon}",
         "format-alt": "{time} {icon}",
@@ -206,22 +162,17 @@
             "warning": 30
         }
     },
-
     "battery/bat2": {
         "bat": "BAT2"
     },
-
     "clock": {
         "format-alt": "{:%Y-%m-%d}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
-
     "cpu": {
         "format": "{usage}% \uf2db",
         "tooltip": false
     },
-
-
     "custom/media": {
         "escape": true,
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null",
@@ -233,19 +184,6 @@
         "max-length": 40,
         "return-type": "json"
     },
-
-    // "custom/emacs": {
-    //     "escape": true,
-    //     "interval": 1,
-    //     "exec": "pgrep emacs",
-    //     "format": "{icon}",
-    //     "format-icons": {
-    //         "default": ""
-    //     },
-    //     "max-length": 10,
-    //     "return-type": "text"
-    // },
-
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
@@ -253,7 +191,6 @@
             "deactivated": "\uf070"
         }
     },
-
     "keyboard-state": {
         "capslock": true,
         "format": "{name} {icon}",
@@ -263,37 +200,33 @@
         },
         "numlock": true
     },
-
     "memory": {
         "format": "{}% \uf0c9"
     },
-
     "network#tailscale": {
         "interface": "",
         "format": "{icon}",
         "format-icons": ["󱗼"],
         "format-ethernet": "{icon}",
-        "format-disconnected": "", //An empty format will hide the module.
+        "format-disconnected": "",
         "on-click": "notify-send 'foo' ; ip -j r | systemd-run --user --pipe --wait wl-copy",
         "format-disconnected": "",
         "tooltip-format": "{ifname}",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50
     },
-
     "network#pia": {
         "interface": "wgpia*",
         "format": "{icon}}",
         "format-icons": ["󰖂"],
         "format-ethernet": "{icon}",
-        "format-disconnected": "", //An empty format will hide the module.
+        "format-disconnected": "",
         "on-click": "notify-send 'foo' ; ip -j r | systemd-run --user --pipe --wait wl-copy",
         "format-disconnected": "",
         "tooltip-format": "{ifname}",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50
     },
-
     "network": {
         "interface": "wlp0s20f3",
         "format": "{ifname}",
@@ -306,33 +239,17 @@
         "󰤥",
         "󰤨"
         ],
-        // "format-wifi": "{essid} ({signalStrength}%)<U+F1EB>",
-        // "format-wifi": "{icon} {essid} ({signalStrength}%)",
         "format-wifi": "{icon} {essid}",
-        // "format-ethernet": "{ifname} <U+F0C1>",
         "format-ethernet": "{ifname}",
-        "format-disconnected": "", //An empty format will hide the module.
-//        "format-disconnected": "<U+F072>",
+        "format-disconnected": "",
         "on-click": "notify-send 'foo' ; ip -j r | systemd-run --user --pipe --wait wl-copy",
         "format-disconnected": "",
         "tooltip-format": "{ifname}",
-        // "tooltip-format-wifi": "{essid} ({signalStrength}%) <U+F1EB>",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "tooltip-format-ethernet": "{ifname}",
-//        "tooltip-format-ethernet": "{ifname} <U+F0C1>",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50
     },
-
-    // "network": {
-    //     "format-alt": "{ifname}: {ipaddr}/{cidr}",
-    //     "format-disconnected": "Disconnected \u26a0",
-    //     "format-ethernet": "{ipaddr}/{cidr} ",
-    //     "format-linked": "{ifname} (No IP) ",
-    //     "format-wifi": "{essid} ({signalStrength}%) \uf1eb",
-    //     "tooltip-format": "{ifname} via {gwaddr} "
-    // },
-
     "power-profiles-daemon": {
         "format": "{icon}",
         "format-icons": {
@@ -344,19 +261,15 @@
         "tooltip": true,
         "tooltip-format": "Power profile: {profile}\nDriver: {driver}"
     },
-
     "wireplumber": {
         "format": "{volume}%",
-        // "format-muted": "<U+F026>",
-        "format-muted": "",     // FIXME
+        "format-muted": "",
         "on-click": "helvum"
     },
-
     "pulseaudio": {
-        "format": "{volume}% {icon} {format_source}",
-//        "format-bluetooth": "{volume}%  {icon} {format_source}",
+        "format": "{icon}",
+        "format-alt": "{volume}% {icon} {format_source}",
         "format-bluetooth": " {icon} {format_source}",
-//        "format-bluetooth-muted": "\udb81\uddff  {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-icons": {
             "car": "\uf1b9",
@@ -372,16 +285,13 @@
             "portable": "\uf095"
         },
         "format-muted": "\udb81\uddff {format_source}",
-//        "format-source": "{volume}% \uf130",
         "format-source": "",
         "format-source-mute3d": "",
         "on-click": "pavucontrol"
     },
-
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
-
     "sway/scratchpad": {
         "format": "{icon} {count}",
         "format-icons": [
@@ -392,7 +302,6 @@
         "tooltip": true,
         "tooltip-format": "{app}: {title}"
     },
-
     "temperature": {
         "critical-threshold": 80,
         "format": "{temperatureC}\u00b0C {icon}",
@@ -400,44 +309,32 @@
             "\uf2c9"
         ]
     },
-
     "tray": {
         "spacing": 3
     },
-
     "modules-center": [
         "clock"
     ],
-
     "modules-left": [
         "sway/workspaces",
         "sway/mode",
         "sway/window"
     ],
-
     "modules-right": [
-
-    "custom/debug",
+        "custom/debug",
         "custom/usb-devices",
-        // "custom/dummy-status",
         "custom/docker-context",
         "custom/gh-user",
-        // "custom/systemd-status",
         "custom/git-status",
-        //  "custom/docker-watch",
         "custom/emacs2",
         "custom/syncthing",
         "backlight",
         "network#pia",
         "network#tailscale",
         "network",
-        // "wireplumber",
         "pulseaudio",
         "temperature",
         "sway/language",
         "battery"
-    ],
-
-//   "include": "conf.d/generated.conf",
-
+    ]
 }
