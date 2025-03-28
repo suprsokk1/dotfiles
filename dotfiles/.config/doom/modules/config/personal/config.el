@@ -34,7 +34,7 @@
     ("s-SPC t t"     . toggle-truncate-lines)
     ("s-SPC t r"     . rainbow-delimiters-mode)
     ("s-SPC n"       . my/org-capture)
-    ("s-u"       . my/midnight-commander-window-swap))
+    ("s-u"           . (lambda (_) (interactive) (windmove-swap-states-left ))))
 
   :init
   (defmacro my/unless-window (window-buffer &rest eval)
