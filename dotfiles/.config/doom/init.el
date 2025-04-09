@@ -13,6 +13,7 @@
   direnv
   debugger
   tree-sitter
+  ein
   (eval +overlay)
   (lsp +eglot)
   (ansible +lsp)

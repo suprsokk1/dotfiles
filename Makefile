@@ -1,26 +1,29 @@
-check			= --dry-run -- dotfiles/ $(HOME)/
-export		= -- dotfiles/ $(HOME)/
-import		= -- $(HOME)/ dotfiles/
-prepare = -- dotfiles/ $(HOME)/
+check   = dotfiles/ $(HOME)/
+check_rsync = --dry-run
+export  = dotfiles/ $(HOME)/
+import  = $(HOME)/ dotfiles/
+prepare = dotfiles/ $(HOME)/
+prepare_rsync = --dry-run --recursive
+backup_dir = $(HOME)/Backup/rsync/$(shell systemd-escape $(PWD))-$(shell date +%s)
 
 .PHONY: default
 default: check
 
 .PHONY: install
-install: export fonts theme
+install: $(nest)
+ifndef nest
+	make install nest="export themes fonts" | ./etc/makefile-helper.sed
+endif
 
-.PHONY: import export check
-import export check: prepare
-	find dotfiles/ -type f -printf '%P\0' | rsync --files-from=- --from0 --backup-dir $(HOME)/Backup/rsync/$(shell systemd-escape $(PWD))-$(shell date +%s) --verbose $(call $@)
-
-.PHONY: prepare
-prepare:
-	find dotfiles/ -type d -mindepth 2 -maxdepth 2 -printf '%P\0'  | rsync --dry-run --recursive --files-from=- --from0 --backup-dir $(HOME)/Backup/rsync/$(shell systemd-escape $(PWD))-$(shell date +%s) --verbose $(call $@)
+.PHONY: import export check prepare
+import export check prepare:
+	find dotfiles/ -type f -printf '%P\0' | \
+      rsync $(call ${@}_rsync) --files-from=- --from0 --backup-dir ${backup_dir} --verbose -- $(call $@)
 
 .PHONY: clean-ignored
 clean-ignored:
 	git clean --dry-run --force -X
 
-.PHONY: fonts theme
-fonts theme:
-	$(HOME)/.local/bin/pkl eval etc/$@.pkl -m $(HOME)/ | sed -En -e '/sway/s#.*#sway reload#ep' -e '/waybar/s#.*#pkill -SIGUSR2 waybar#ep'
+.PHONY: themes fonts
+themes fonts:
+	$(HOME)/.local/bin/pkl eval etc/$@.pkl -m $(HOME)/

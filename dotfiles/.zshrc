@@ -1,7 +1,7 @@
 ZSH=${HOME}/.oh-my-zsh
 ZSH_THEME=simple
 
-plugins=( git fzf tmux pip direnv docker gh )
+plugins=( git gh fzf tmux pip direnv docker )
 
 # bash completion
 plugins+=( compleat )
@@ -43,10 +43,10 @@ pipe-yaml2pkl() {
 }
 
 # global aliases
-alias -g T='python -m trace --ignore-dir=$(python -c "import sys; print(*sys.path[1:], sep=\":\")")'
-alias -g G=grep
-alias -g R=rg
-alias -g W='whence -f'
+alias -g ,python-trace='python -m trace --ignore-dir=$(python -c "import sys; print(*sys.path[1:], sep=\":\")")'
+alias -g ,G='| grep'
+alias -g ,R='| rg'
+alias -g ,W='whence -f'
 
 # extension aliases
 alias -s git='command git -C $HOME/opt clone --depth=1'
