@@ -64,6 +64,14 @@ main() {
       echo TODO 'Clipboard pipe to ...'
       ;;
 
+    "${$}"Dotfiles?install)  # @action
+      tmux neww "cd ~/Projects/dotfiles/ || exit; make install"
+      ;;
+
+    "${$}"Dotfiles?refresh)  # @action
+      tmux neww "cd ~/Projects/dotfiles/ || exit; make refresh"
+      ;;
+
     "${$}"Clipboard?ungron)  # @submenu
       notify-send "${0##*/}" "$(wl-paste)"
       wl-paste | tee paste | gron -u > res
@@ -77,10 +85,6 @@ main() {
 
     "${$}"Clipboard?clean?ANSI?escapese)  # @submenu
       wl-paste | ansifilter | wl-copy
-      ;;
-
-    "${$}"Fooo)
-      parse
       ;;
 
     "${$}"Clipboard?transform?from?...)  # @submenu
@@ -111,24 +115,25 @@ main() {
       ;;
 
     "${$}"Clipboard?JSON?to?PKL)  # @action
-      wl-paste | pkl eval "${HOME}"/opt/pkl-pantry/packages/pkl.pipe/json.pkl -x 'pipe' | grep -Po '(?<=new\sDynamic\s\x7b).*(?=\x7d)' | pkl eval - | tee res| wl-copy
+      wl-paste |
+        pkl eval "${HOME}"/opt/pkl-pantry/packages/pkl.pipe/json.pkl -x 'pipe' |
+        grep -Po '(?<=new\sDynamic\s\x7b).*(?=\x7d)' |
+        pkl eval - |
+        tee res |
+         wl-copy
       notify-send "${0##*/}" "$( < res)"
 
       ;;
 
-    "${$}"Projects)               # @source
-
-      ;;
-
-    "${$}"Projects)               # @source
-
+    "${$}"Projects)               # @submenu
+      find "$HOME"/Projects/ -maxdepth 1 \( -xtype d -or -type d \)
       ;;
 
     *)
 
       # grep -Po '(?<=@submenu)\)' "$0"
 
-  esac | sort -u | sed '/^ /d' | sed 's/./@\0/'
+  esac | sort -u | sed '/^ /d'
   # | sed -E 's/.*/|\0|/'
 
 }

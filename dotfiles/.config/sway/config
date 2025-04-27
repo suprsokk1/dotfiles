@@ -116,7 +116,7 @@ bindsym {
 
     # launcher (app launcher)
     $MOD+d {
-        exec rofi -show combi -modi combi,run,window,ssh,filebrowser -combi drun,window,custom
+        exec rofi -show combi,menu -modi combi,run,window,ssh,filebrowser -combi drun,window,custom
         # exec rofi -show combi -c
     }
 

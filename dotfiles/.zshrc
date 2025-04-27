@@ -36,11 +36,14 @@ fi
 
 . ~/.pklpipe
 
-pipe-yaml2pkl() {
+function ,pipe-yaml2pkl {
     if [ -t 0 ]
     then wl-paste
     fi | pyq "pipe${*:+.}${*}" | grep -Po '(?<=\{).+(?=\})'| pkl eval -
 }
+
+alias ,pyq='pyq'
+
 
 # global aliases
 alias -g ,python-trace='python -m trace --ignore-dir=$(python -c "import sys; print(*sys.path[1:], sep=\":\")")'
@@ -53,43 +56,43 @@ alias -s git='command git -C $HOME/opt clone --depth=1'
 alias -s pkl='command pkl eval'
 
 if nomino --version &>/dev/null
-then alias -- rename='noglob nomino --no-extension --mkdir --generate $HOME/Backup/_nomino-map_${EPOCHSECONDS}_`date -I`-${RANDOM}.map --regex'
-     alias -- rename-test='noglob nomino --dry-run --no-extension --mkdir --generate $HOME/Backup/_nomino-map_${EPOCHSECONDS}_`date -I`-${RANDOM}.map --regex'
-     alias -- ren=rename
+then alias -- ,rename='noglob nomino --no-extension --mkdir --generate $HOME/Backup/_nomino-map_${EPOCHSECONDS}_`date -I`-${RANDOM}.map --regex'
+     alias -- ,rename-test='noglob nomino --dry-run --no-extension --mkdir --generate $HOME/Backup/_nomino-map_${EPOCHSECONDS}_`date -I`-${RANDOM}.map --regex'
+     alias -- ,ren=rename
 fi
 
 if fd --version &>/dev/null
-then alias -- fd='command fd --no-ignore-vcs'
-     alias -- fs2json='fd -uuu -tf -X jo {}=@{} --base-directory'
+then alias -- ,fd='command fd --no-ignore-vcs'
+     alias -- ,fs2json='fd -uuu -tf -X jo {}=@{} --base-directory'
 fi
 
 if gron --version &>/dev/null
-then alias -- gron='command gron ${INSIDE_EMACS:+--colorize}'
+then alias -- ,gron='command gron ${INSIDE_EMACS:+--colorize}'
 fi
 
 if exa --version &>/dev/null
-then alias -- ls='command exa --git --group-directories-first'
+then alias -- ,ls='command exa --git --group-directories-first'
 fi
 
 if bat --version &>/dev/null
-then alias -- cat='command bat'
+then alias -- ,cat='command bat'
 fi
 
 if jc --version &>/dev/null
-then alias -- jc='command jc'
+then alias -- ,jc='command jc'
 fi
 
 if tldr --version &>/dev/null
-then alias -- man='command tldr'
+then alias -- ,man='command tldr'
 fi
 
 if yj -v &>/dev/null
-then alias -- yj='command yj -yj'
-     alias -- yt='command yj -yt'
-     alias -- jy='command yj -jy'
-     alias -- jt='command yj -jt'
-     alias -- ty='command yj -ty'
-     alias -- tj='command yj -tj'
+then alias -- ,yj='command yj -yj'
+     alias -- ,yt='command yj -yt'
+     alias -- ,jy='command yj -jy'
+     alias -- ,jt='command yj -jt'
+     alias -- ,ty='command yj -ty'
+     alias -- ,tj='command yj -tj'
 fi
 
 unset FZF_DEFAULT_OPTS
