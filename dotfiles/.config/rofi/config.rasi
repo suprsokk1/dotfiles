@@ -1,0 +1,159 @@
+/* -*- mode: css -*- */
+@theme "theme.rasi"
+
+configuration {
+    /* font: "UbuntuMono Nerd Font 14"; */
+
+    drun-hide-mode-prefix: true;
+    combi-hide-mode-prefix: true;
+    show-icons: true;
+    /* modes:       ["combi"]; */
+    /* combi-modes: ["window", "drun", "keys"]; */
+    kb-remove-to-eol: ["Control+Shift+k"];
+    kb-delete-entry: ["Control+k"];
+
+    kb-mode-previous: ["Alt+p"];
+    kb-mode-next:     ["Alt+n"];
+    show-icons: true;
+
+    /* icon-theme: "Papirus"; */
+    /* scrollbar:  false; */
+    /* show-icons: true; */
+
+    window {
+        /* background-color: rgba(100, 100, 100, 100%); */
+        /* background-color: rgb(255, 255, 255); */
+        background-color: var(bg-window);
+        close-on-delete: false;
+        /* reverse: true; */
+        hide-active-window: true;
+        show-thumnail: true;
+    }
+
+    /* window { */
+    /*     /\* background-color: rgba(100, 100, 100, 100%); *\/ */
+    /*     background-color: var(bg-window); */
+    /*     close-on-delete: false; */
+    /*     reverse: true; */
+    /*     hide-active-window: true; */
+    /* } */
+
+    /* window { */
+    /*     /\* background-color: rgba(100, 100, 100, 100%); *\/ */
+    /*     background-color: var(bg-window); */
+    /*     close-on-delete: false; */
+    /*     reverse: true; */
+    /* } */
+
+}
+
+window {
+    background-color: var(bg-window);
+}
+
+listview {
+    lines: 10;
+    scrollbar: false;
+}
+
+recursivebrowser {
+    directories-first: false;
+    /* filter-regex: "(.*cache.*|.*\.o|*\.rasi)"; */
+    /**
+     * Sorting method. Can be set to:
+     *   - "name"
+     *   - "mtime" (modification time)
+     *   - "atime" (access time)
+     *   - "ctime" (change time)
+     */
+    sorting-method:    "ctime";
+}
+
+filebrowser {
+    /* directories-first: true; */
+    directories-first: false;
+    sorting-method:    "name";
+}
+
+timeout {
+    action: "kb-cancel";
+    delay:  0;
+}
+
+entry {
+    text-color:        var(text-input);
+    cursor:            text;
+    spacing:           5;
+    placeholder-color: Gray;
+    placeholder:       "Type to filter";
+}
+
+inputbar {
+    text-color: var(text-selection);
+    padding:    1px ;
+    spacing:    0px ;
+    children:   var(input-items);
+}
+
+textbox {
+    text-color:       var(text-normal);
+}
+
+element-icon {
+    background-color: transparent;
+    size:             1.5000em ;
+    cursor:           inherit;
+    text-color:       var(text-normal);
+}
+
+box {
+    text-color:       var(text-normal);
+}
+
+element {
+    text-color:       var(text-normal);
+    padding: 7px ;
+    cursor:  pointer;
+    spacing: 5px ;
+    border:  0;
+}
+
+element selected {
+    text-color:       var(text-selection);
+}
+
+element normal.normal {
+    text-color:       var(text-normal);
+}
+
+element normal.urgent {
+    text-color:       var(text-normal);
+}
+
+element normal.active {
+    text-color:       var(text-selection);
+}
+
+element selected.normal {
+    text-color:       var(text-selection);
+}
+
+element selected.urgent {
+    text-color:       var(text-selection);
+}
+
+element selected.active {
+    text-color:       var(text-selection);
+}
+
+element alternate.normal {
+    text-color:       var(text-normal);
+}
+
+element alternate.urgent {
+    text-color:       var(text-normal);
+}
+
+element alternate.active {
+    text-color:       var(text-normal);
+}
