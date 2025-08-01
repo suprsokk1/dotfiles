@@ -1,9 +1,0 @@
-[submodule "dotfiles/.local/share/emacs/snippets"]
-	path = dotfiles/.local/share/emacs/snippets
-	url = https://github.com/suprsokk1/yasnippets.git
-[submodule "dotfiles/.local/bin"]
-	path = dotfiles/.local/bin
-	url = https://github.com/suprsokk1/script
-[submodule "src/pkl"]
-	path = src/pkl
-	url = https://github.com/suprsokk1/pkl
